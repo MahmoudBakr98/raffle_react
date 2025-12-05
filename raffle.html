@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Raffle Wheel</title>
+  <style>
+    svg {
+      width: 400px;
+      height: 400px;
+      transform: rotate(-90deg);
+    }
+    #wheel {
+      transition: transform 4s ease-out;
+      transform-origin: 50% 50%;
+    }
+    .label {
+      font-size: 10px;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      fill: white;
+    }
+  </style>
+</head>
+<body>
+
+<svg viewBox="0 0 200 200">
+  <g id="wheel"></g>
+</svg>
+
+<button onclick="spin()">Spin</button>
+
+<script>
+  const names = ["Alice", "Bob", "Charlie", "Diana", "Eve"];
+  const wheel = document.getElementById("wheel");
+
+  const radius = 100;
+  const center = 100;
+  const anglePerSlice = 360 / names.length;
+
+  function drawWheel() {
+    for (let i = 0; i < names.length; i++) {
+      const startAngle = i * anglePerSlice;
+      const endAngle = (i + 1) * anglePerSlice;
+      const largeArc = anglePerSlice > 180 ? 1 : 0;
+
+      const x1 = center + radius * Math.cos((startAngle * Math.PI) / 180);
+      const y1 = center + radius * Math.sin((startAngle * Math.PI) / 180);
+      const x2 = center + radius * Math.cos((endAngle * Math.PI) / 180);
+      const y2 = center + radius * Math.sin((endAngle * Math.PI) / 180);
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", `M${center},${center} L${x1},${y1} A${radius},${radius} 0 ${largeArc} 1 ${x2},${y2} Z`);
+      path.setAttribute("fill", `hsl(${i * anglePerSlice}, 70%, 50%)`);
+      wheel.appendChild(path);
+
+      // Add label
+      const labelAngle = startAngle + anglePerSlice / 2;
+      const lx = center + radius / 2 * Math.cos((labelAngle * Math.PI) / 180);
+      const ly = center + radius / 2 * Math.sin((labelAngle * Math.PI) / 180);
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", lx);
+      text.setAttribute("y", ly);
+      text.setAttribute("class", "label");
+      text.textContent = names[i];
+      wheel.appendChild(text);
+    }
+  }
+
+  drawWheel();
+
+  function spin() {
+    const randomDeg = 360 * 5 + Math.floor(Math.random() * 360); // 5 full spins + random
+    wheel.style.transform = `rotate(${randomDeg}deg)`;
+  }
+</script>
+
+</body>
+</html>
