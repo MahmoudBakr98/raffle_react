@@ -37,6 +37,7 @@
     "@svgr/rollup": "^8.1.0",
     "@tanstack/router-plugin": "^1.128.8",
     "@typechain/ethers-v6": "^0.5.1",
+    "@types/node": "^24.10.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",
