@@ -1,13 +1,6 @@
 import { Wallet } from "lucide-react";
 
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardAction, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 import MetaMaskIcon from "./assets/meta_mask_icon.svg?react";
 import ChainlinkIcon from "./assets/chainlink_icon.svg?react";
